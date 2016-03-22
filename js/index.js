@@ -262,8 +262,8 @@ function particle(x, y, type) {
     else
     {
       d=utils.distanceXY(cursorX,cursorY-pageYOffset,this.x,this.y)
-      if(d<100){
-          this.setSpeed((100-d)/10+1)
+      if(d<200){
+          this.setSpeed((180-d)/10+1)
           this.setHeading(utils.getAngle({x:cursorX,y:cursorY-pageYOffset},this))
       }
       this.x += this.vx;
