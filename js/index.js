@@ -123,8 +123,10 @@ var utils = {
 
 canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
-W = canvas.width = window.innerWidth;
-H = canvas.height = window.innerHeight;
+W = canvas.width = window.innerWidth*2;
+H = canvas.height = window.innerHeight*2;
+canvas.style.width = W/2+"px";
+canvas.style.height = H/2+"px";
 
 gridX = 1;
 gridY = 1;
@@ -169,13 +171,14 @@ shape.prototype.getValue = function() {
   }
   ctx.clearRect(0, 0, W, H);
 
+  ctx.scale(2,2);
 }
 colors = [
   '#000000','#333333','#0076FF'
 ];
 particleI = 0
 function particle(x, y, type) {
-  this.radius = 1;
+  this.radius = .8;
 
   this.i = particleI
   particleI++
