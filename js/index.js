@@ -242,13 +242,13 @@ function particle(x, y, type) {
         this.dying = true
       }
       else {
-        this.x = (this.x*d + this.base.x)/(d+1)
+        this.x = (this.x*d + this.base.x+Math.sin(this.base.y/5+time)*2)/(d+1)
         this.y = (this.y*d + Math.sin(this.base.x/50+time)*20+this.base.y-230)/(d+1)
         this.dying = true;
       }
     }
     else if(this.dying){
-      var d = 2;
+      var d = 0;
       this.x = (this.x*d + this.base.x)/(d+1)
       this.y = (this.y*d + this.base.y-pageYOffset)/(d+1)
 
@@ -266,8 +266,8 @@ function particle(x, y, type) {
     {
       d=utils.distanceXY(cursorX,cursorY-pageYOffset,this.x,this.y)
       if(d<200){
-          this.setSpeed((100+Math.sin(time)*100-d)/10+1)
-          this.setHeading(utils.getAngle({x:cursorX,y:cursorY-pageYOffset},this))
+          this.setSpeed((this.getSpeed()*2 + ((100+Math.sin(time*2)*100-d)/20+1-10*mouseDown))/3)
+          this.setHeading(utils.getAngle({x:cursorX,y:cursorY-pageYOffset},this)+mouseDown*Math.PI)
       }
       this.x += this.vx;
       this.y += this.vy + scrollYOffset;
@@ -311,6 +311,15 @@ var time = 0;
 document.onmousemove = function(e){
     cursorX = e.pageX;
     cursorY = e.pageY;
+}
+var mouseDown = false;
+document.body.onmousedown = function() {
+  mouseDown = true;
+              console.log(mouseDown*2)
+}
+document.body.onmouseup = function() {
+  mouseDown = false;
+              console.log(mouseDown*2)
 }
 
 var message = new shape(800, 350, "COLL");
