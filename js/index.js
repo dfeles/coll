@@ -137,8 +137,7 @@ $(document).ready(function(){
   canvas.style.width = W/2+"px";
   canvas.style.height = H/2+"px";
 
-  message = new shape($("#coll").offset().left+2, $("#coll").offset().top+parseInt($("#coll").css("fontSize"), 10)-6, $("#coll").text(), $("#coll").css("fontSize"));
-  console.log($("#coll").offset().top);
+  
 
   document.onmousemove = function(e){
     cursorX = e.pageX;
@@ -337,6 +336,8 @@ var message;
 
 var fps = 100;
 function start(){
+  message = new shape($("#coll").offset().left+2, $("#coll").offset().top+parseInt($("#coll").css("fontSize"), 10)-6, $("#coll").text(), $("#coll").css("fontSize"));
+  
   message.getValue();
   update();
 }
