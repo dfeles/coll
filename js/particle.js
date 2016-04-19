@@ -10,7 +10,7 @@ function particle(x, y, type) {
   particleI++
 
   this.age = 1.1;
-  this.dieAt = utils.randomInt(dieAt, dieAt*80);
+  this.dieAt = utils.randomInt(dieAt, dieAt*30);
 
 
   this.rebond = utils.randomInt(1, 5);
