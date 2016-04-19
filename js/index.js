@@ -137,7 +137,7 @@ $(document).ready(function(){
   canvas.style.width = W/2+"px";
   canvas.style.height = H/2+"px";
 
-  message = new shape($("#coll").offset().left + 15, $("#coll").offset().top+115, $("#coll").text(), $("#coll").css("fontSize"));
+  message = new shape($("#coll").offset().left+2, $("#coll").offset().top+parseInt($("#coll").css("fontSize"), 10)-6, $("#coll").text(), $("#coll").css("fontSize"));
   console.log($("#coll").offset().top);
 
   document.onmousemove = function(e){
@@ -153,8 +153,10 @@ $(document).ready(function(){
   });
 });
 
+var originalX = 0
 function shape(x, y, texte, size) {
   this.x = x;
+  originalX = x;
   this.y = y;
   this.size = size;
 
@@ -344,6 +346,8 @@ scrollYOffset = 0
 
 function update() {
   setTimeout(function() {
+
+    XOffset = originalX - ($("#coll").offset().left + 18)
 
     scrollYOffset = lastScroll - pageYOffset
     lastScroll = pageYOffset
