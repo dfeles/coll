@@ -331,7 +331,7 @@ function particle(x, y, type) {
      else
      {
 
-      this.radius = (30*this.radius +(noise.perlin3(this.x/40, this.y/40, time) + .3))/31
+      this.radius = (30*this.radius +(noise.perlin3(this.x/40, this.y/40, time) + .5))/31
       this.alpha = 1;
       this.setSpeed((30*this.getSpeed() + speed)/31);
      }
