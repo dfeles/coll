@@ -301,13 +301,14 @@ function particle(x, y, type) {
 
       this.vx *= this.friction;
       this.vy *= this.friction;
+      this.alpha = 1;
 
       if(this.age < this.dieAt && this.dying === false){
         this.age += duration;
         var d = window.pageYOffset+.1;
         var direction = noise.perlin3(this.x/40, this.y/40, time)*20
-        this.setHeading((this.getHeading()*10 + direction)/11);
 
+        this.setHeading((this.getHeading()*10 + direction)/11);
       }else{
         if(!this.dying)
         {
@@ -324,14 +325,18 @@ function particle(x, y, type) {
      if(mouseDown)
      {
       this.setSpeed(5)
+      this.radius = (30*this.radius + 2)/31
+      this.alpha = noise.perlin3(this.x/40, this.y/40, time);
      }
      else
      {
 
+      this.radius = (30*this.radius +(noise.perlin3(this.x/40, this.y/40, time) + .3))/31
+      this.alpha = 1;
       this.setSpeed((30*this.getSpeed() + speed)/31);
      }
     }
-
+    ctx.globalAlpha=this.alpha;
     ctx.fillRect(this.x,this.y, this.radius,this.radius)
 
   };
