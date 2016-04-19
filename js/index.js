@@ -118,23 +118,45 @@ var utils = {
   },
 
 }
+var ctx
+var cursorX;
+var cursorY;
+var time = 0;
+
+var mouseDown = false;
+var gridX = 1;
+var gridY = 1;
+
 
 // basic setup  :)
+$(document).ready(function(){
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext('2d');
+  W = canvas.width = window.innerWidth*2;
+  H = canvas.height = window.innerHeight*2;
+  canvas.style.width = W/2+"px";
+  canvas.style.height = H/2+"px";
 
-canvas = document.getElementById("canvas");
-var ctx = canvas.getContext('2d');
-W = canvas.width = window.innerWidth*2;
-H = canvas.height = window.innerHeight*2;
-canvas.style.width = W/2+"px";
-canvas.style.height = H/2+"px";
+  message = new shape($("#coll").offset().left + 15, $("#coll").offset().top+115, $("#coll").text(), $("#coll").css("fontSize"));
+  console.log($("#coll").offset().top);
 
-gridX = 1;
-gridY = 1;
+  document.onmousemove = function(e){
+    cursorX = e.pageX;
+    cursorY = e.pageY;
+  }
+  $( "document" ).mousedown(function() {
+    mouseDown = true;
+  });
 
-function shape(x, y, texte) {
+  $( "document" ).mouseup(function() {
+    mouseDown = true;
+  });
+});
+
+function shape(x, y, texte, size) {
   this.x = x;
   this.y = y;
-  this.size = 120;
+  this.size = size;
 
   this.text = texte;
   this.placement = [];
@@ -146,9 +168,9 @@ shape.prototype.getValue = function() {
   console.log("get black pixels position");
 
   // Draw the shape :^)
-
-  ctx.textAlign = "center";
-  ctx.font = '800 120px "Raleway"';
+  console.log($("#coll").css("fontFamily"));
+  ctx.font = 'bold '+$("#coll").css("fontSize")+'"'+$("#coll").css("fontFamily")+'"' ;
+//  ctx.css("font-size",$("#coll").css("fontSize"));
   ctx.fillText(this.text, this.x, this.y);
 
   // get the data
@@ -177,6 +199,8 @@ colors = [
   '#000000','#333333','#0076FF'
 ];
 particleI = 0
+
+
 function particle(x, y, type) {
   this.radius = .8;
 
@@ -305,24 +329,9 @@ function particle(x, y, type) {
 }
 
 
-var cursorX;
-var cursorY;
-var time = 0;
-document.onmousemove = function(e){
-    cursorX = e.pageX;
-    cursorY = e.pageY;
-}
-var mouseDown = false;
-document.body.onmousedown = function() {
-  mouseDown = true;
-              console.log(mouseDown*2)
-}
-document.body.onmouseup = function() {
-  mouseDown = false;
-              console.log(mouseDown*2)
-}
 
-var message = new shape(800, 350, "COLL");
+
+var message;
 
 var fps = 100;
 function start(){

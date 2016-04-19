@@ -35,15 +35,36 @@ color:#222;
 
 }
 #weare{
-  color: #000;
   position: absolute;
-  font-size: 120px;
-  top:240px;
-  left:150px;
+  top:120px;
+  width: 100%;
+  color: #000;
+  font-size: 80px;
+  vertical-align: middle;
+  text-align: center;
+  text-transform: uppercase;
   font-family: Raleway;
 }
-#weare b{
-  color: rgba(0, 0, 0, 0.2);
+#coll{
+  color: #000;
+  font-size: 120px;
+  vertical-align: middle;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Raleway;
+  font-size: 120px;
+  color: rgba(0, 0, 0, 0.02);
+}
+#subtitle{
+  color: #000;
+  position: absolute;
+  font-size: 18px;
+  top:400px;
+  width: 100%;
+  text-align: center;
+  font-family: Raleway;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
 }
 canvas{
   position: fixed;

@@ -5,8 +5,11 @@
     <title>Text particle</title>
 
 
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <script src='js/perlin.js'></script>
+    <script src="js/index.js"></script>
 
-      <link href='https://fonts.googleapis.com/css?family=Raleway:400,800' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Raleway:400,900' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/style.css">
 
 
@@ -18,21 +21,26 @@
   <body>
     <div id="header">
 
-      <div id="weare">WE ARE <b>COLL</b></div>
+      <div id="weare">
+        WE ARE <span id="coll"><b>COLL</b></span>
+      </div>
+      <div id="subtitle">
+        We believe in skill and mischief, and that they can go hand in hand.<br>This is how ideas are born. <br> <br>
+        hello@coll.hu
+        <br>
+        <a href="https://www.facebook.com/The-COLL-441344502723926/info/?tab=page_info">#TheCOLL</a>
+        <br> <br><br> <br>
+        Balázs Sánta / Ábel Regős / Luca Fülöp / Eszter Salamon / Dániel Feles
+        <br>
+        Bori Soós / Peti Franyó / Kristóf Generál / Judit Nagy / Gergő Garam / Bálint Orosz
+      </div>
     </div>
     <div id="content">
-      I am the content <br> <br> <br> <br> <br> <br> <br> <br>
-      I am the content <br> <br> <br> <br> <br> <br> <br> <br>
-      I am the content <br> <br> <br> <br> <br> <br> <br> <br>
-      I am the content <br> <br> <br> <br> <br> <br> <br> <br>
-      I am the content <br> <br> <br> <br> <br> <br> <br> <br>
-      I am the content <br> <br> <br> <br> <br> <br> <br> <br>
+    
     </div>
 
     <div id="canvasHolder">
       <canvas id="canvas"></canvas>
-      <script src='js/perlin.js'></script>
-      <script src="js/index.js"></script>
     </div>
   </body>
 </html>
