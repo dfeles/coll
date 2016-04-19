@@ -15,7 +15,7 @@ WebFontConfig = {
 
 
 gravity = .01;
-speed = .3;
+speed = .5;
 duration =  1;
 dieAt = 2;
 
@@ -143,12 +143,12 @@ $(document).ready(function(){
     cursorX = e.pageX;
     cursorY = e.pageY;
   }
-  $( "document" ).mousedown(function() {
+  $( "body" ).mousedown(function() {
     mouseDown = true;
   });
 
-  $( "document" ).mouseup(function() {
-    mouseDown = true;
+  $( "body" ).mouseup(function() {
+    mouseDown = false;
   });
 });
 
@@ -197,7 +197,7 @@ shape.prototype.getValue = function() {
   ctx.scale(2,2);
 }
 colors = [
-  '#000000','#333333','#0076FF'
+  '#FFFFFF','#FFFFFF','#FFFFFF'
 ];
 particleI = 0
 
@@ -209,7 +209,7 @@ function particle(x, y, type) {
   particleI++
 
   this.age = 1.1;
-  this.dieAt = utils.randomInt(dieAt, dieAt*40);
+  this.dieAt = utils.randomInt(dieAt, dieAt*80);
 
 
   this.rebond = utils.randomInt(1, 5);
@@ -224,9 +224,8 @@ function particle(x, y, type) {
   this.vx = 0;
   this.vy = 0;
   this.type = type;
-  this.friction =.98;
-  this.gravity = gravity;
-  this.color = colors[Math.floor(Math.random() * colors.length)];
+  this.friction =1;
+  this.gravity = 15;
 
   this.getSpeed = function() {
     return Math.sqrt(this.vx * this.vx + this.vy * this.vy);
@@ -294,6 +293,8 @@ function particle(x, y, type) {
           this.setSpeed((this.getSpeed()*2 + ((100+Math.sin(time*2)*100-d)/20+1-10*mouseDown))/3)
           this.setHeading(utils.getAngle({x:cursorX,y:cursorY-pageYOffset},this)+mouseDown*Math.PI)
       }
+
+
       this.x += this.vx;
       this.y += this.vy + scrollYOffset;
       this.vy += gravity;
@@ -317,7 +318,18 @@ function particle(x, y, type) {
         }
       }
 
+     if(switchingMouse){
+       this.setSpeed(50)
+     }
+     if(mouseDown)
+     {
+      this.setSpeed(5)
+     }
+     else
+     {
 
+      this.setSpeed((30*this.getSpeed() + speed)/31);
+     }
     }
 
     ctx.fillRect(this.x,this.y, this.radius,this.radius)
@@ -325,6 +337,7 @@ function particle(x, y, type) {
   };
 
   this.setSpeed(speed);
+
   this.setHeading(utils.randomInt(utils.degreesToRads(-180), utils.degreesToRads(180)));
 
 }
@@ -337,17 +350,26 @@ var message;
 var fps = 100;
 function start(){
   message = new shape($("#coll").offset().left+2, $("#coll").offset().top+parseInt($("#coll").css("fontSize"), 10)-6, $("#coll").text(), $("#coll").css("fontSize"));
-  
+
   message.getValue();
   update();
 }
 
 lastScroll = 0
 scrollYOffset = 0
-
+prevMouseDown = true
+switchingMouse = false
 function update() {
   setTimeout(function() {
-
+    if (prevMouseDown != mouseDown)
+    {
+      prevMouseDown = mouseDown
+      switchingMouse = true
+    }
+    else
+    {
+      switchingMouse = false
+    }
     XOffset = originalX - ($("#coll").offset().left + 18)
 
     scrollYOffset = lastScroll - pageYOffset
