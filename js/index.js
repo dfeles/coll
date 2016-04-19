@@ -325,8 +325,8 @@ function particle(x, y, type) {
      if(mouseDown)
      {
       this.setSpeed(5)
-      this.radius = (30*this.radius + 2)/31
-      this.alpha = noise.perlin3(this.x/40, this.y/40, time);
+      this.radius = (30*this.radius + 1.5)/31
+      this.alpha = noise.perlin3(this.x/40, this.y/40, time)+.3;
      }
      else
      {
